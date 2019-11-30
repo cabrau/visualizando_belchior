@@ -17,4 +17,6 @@ Antonio Carlos Belchior, mais conhecido como Belchior (Sobral, 26 de outubro de 
 - Qual a polaridade de sentimento e o nível de subjetividade dominante na obra? E por música? 
 - Quais são as palavras que mais ocorrem juntas? 
 
-Vamos ver o que conseguimos descobrir! 
+Vamos ver o que conseguimos descobrir!
+
+As visualizações estão contidas nos arquivos HTML e foram geradas neste [notebook](https://github.com/cabrau/visualizando_belchior/blob/master/visualizando_belchior.ipynb)

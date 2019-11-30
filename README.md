@@ -19,4 +19,29 @@ Antonio Carlos Belchior, mais conhecido como Belchior (Sobral, 26 de outubro de 
 
 Vamos ver o que conseguimos descobrir!
 
-As visualizações estão contidas nos arquivos HTML e foram geradas neste [notebook](https://github.com/cabrau/visualizando_belchior/blob/master/visualizando_belchior.ipynb)
+O código de geração das visualizações, bem como uma breve explicação das análises realizadas, estão neste [notebook](https://github.com/cabrau/visualizando_belchior/blob/master/visualizando_belchior.ipynb).
+
+# Sobre os dados
+As letras foram extraídas do site [Letras](https://www.letras.mus.br/) através de um [web-crawler](https://github.com/cabrau/visualizando_belchior/blob/master/scrapping_lyrics.ipynb). Dando como input o nome do artista, o web-crawler percorre a lista de todas as músicas do artista, armazenando em uma tabela o título da música, se é uma das mais tocadas e a letra, descartando músicas cuja composição não seja do artista escolhido.
+
+Após essa coleta, os dados passaram por uma etapa de [extração de features](https://github.com/cabrau/visualizando_belchior/blob/master/pre_processing_text.ipynb) utilizando técnicas de processamento de linguagem natural, incluindo:
+
+* Contagem de palavras por documento
+* Tokenização
+* Remoção de stopwords
+* Normalização
+* Extração de palavras-chave
+* Distribuição de frequências de tokens
+* Extração de nGramas
+* Cálculo de matriz termo-documento (TF-IDF)
+* Matriz de similaridade de documentos
+* Redução de dimensionalidade com UMAP
+* Análise de sentimentos
+* Modelagem de tópicos
+
+[Quantidade de palavras por música](https://raw.githubusercontent.com/cabrau/visualizando_belchior/master/1_tamanho_musicas.html)
+
+[Termos mais frequentes](https://raw.githubusercontent.com/cabrau/visualizando_belchior/master/2_frequencia%20termos.html)
+
+## Nuvem de palavras
+![WordCloud](https://github.com/cabrau/visualizando_belchior/blob/master/wordcloud.png?raw=true)

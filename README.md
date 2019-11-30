@@ -39,9 +39,9 @@ Após essa coleta, os dados passaram por uma etapa de [extração de features](h
 * Análise de sentimentos
 * Modelagem de tópicos
 
-[Quantidade de palavras por música](https://raw.githubusercontent.com/cabrau/visualizando_belchior/master/1_tamanho_musicas.html)
+[Quantidade de palavras por música](https://github.com/cabrau/visualizando_belchior/blob/master/1_tamanho_musicas.html)
 
-[Termos mais frequentes](https://raw.githubusercontent.com/cabrau/visualizando_belchior/master/2_frequencia%20termos.html)
+[Termos mais frequentes](https://github.com/cabrau/visualizando_belchior/blob/master/2_frequencia%20termos.html)
 
 ## Nuvem de palavras
 ![WordCloud](https://github.com/cabrau/visualizando_belchior/blob/master/wordcloud.png?raw=true)

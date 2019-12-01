@@ -56,5 +56,5 @@ Esta análise foi realizada utilizando a biblioteca [TextBlob](https://textblob.
 * x < -0.1 = Negativo
 * -0.1 <= x <= 0.1 = Neutro
 * x > 0.1 = Positivo<br>
-![Pizza](piechart.png)
 ### [Análise de Sentimentos](5_sentimentos.html)
+![Pizza](piechart.png)

@@ -45,7 +45,7 @@ Quais os termos que mais se repentem na obra e em quais músicas eles aparecem.<
 ![Nuvem de palavras](https://github.com/cabrau/visualizando_belchior/blob/master/wordcloud.png?raw=true)
 
 # Grafo de Co-Ocorrência
-Além de conhecer os termos mais utilizados, podemos visualizar como eles aparecem em conjunto através de uma rede. Cada nó do grafo é uma palavra e uma aresta significa que estas ocorrem juntas.<br>
+Além de conhecer os termos mais utilizados, podemos visualizar como eles aparecem em conjunto através de uma rede. Cada nó do grafo é uma palavra e uma aresta significa que estas ocorrem juntas. O tamanho dos nós é proporcional a quantidade de vezes que o termo ocorre.<br>
 ### [Rede de Co-ocorrência](3_network.html)
 
 # Similaridade entre Composições

@@ -1,10 +1,4 @@
-# Visualizando a Poesia de Belchior
-
-Projeto final da disciplina Visualização Científica, ministrada pela professora Emanuele Santos. 
-
-**Lucas Cabral** <br>
-Universidade Federal do Ceará, Mestrado e Doutorado em Ciências da Computação<br>
-2019.2
+*Por Lucas Cabral*
 
 ![Belchior](https://www.urbanarts.com.br/imagens/produtos/123739/0/Ampliada/amar-e-mudar-as-coisas.jpg)
 *Arte: [Daniel Brandão](https://www.estudiodanielbrandao.com/)*
@@ -22,7 +16,7 @@ Vamos ver o que conseguimos descobrir!
 O código de geração das visualizações, bem como uma breve explicação das análises realizadas, estão neste [notebook](https://github.com/cabrau/visualizando_belchior/blob/master/visualizando_belchior.ipynb).
 
 # Sobre os dados
-As letras foram extraídas do site [Letras](https://www.letras.mus.br/) através de um [web-crawler](https://github.com/cabrau/visualizando_belchior/blob/master/scrapping_lyrics.ipynb). Dando como input o nome do artista, o web-crawler percorre a lista de todas as músicas do artista, armazenando em uma tabela o título da música, se é uma das mais tocadas e a letra, descartando músicas cuja composição não seja do artista escolhido.
+As letras foram extraídas do site [Letras](https://www.letras.mus.br/) através de um [web-crawler](https://github.com/cabrau/visualizando_belchior/blob/master/scrapping_lyrics.ipynb). Dando como input o nome do artista, o web-crawler percorre a lista de todas as músicas do artista, armazenando em uma tabela o título da música, se é uma das mais tocadas e a letra, descartando músicas cuja composição não seja do artista escolhido. Ao total, foram extraídos **91** composições.
 
 Após essa coleta, os dados passaram por uma etapa de [extração de features](https://github.com/cabrau/visualizando_belchior/blob/master/pre_processing_text.ipynb) utilizando técnicas de processamento de linguagem natural, incluindo:
 
@@ -39,9 +33,23 @@ Após essa coleta, os dados passaram por uma etapa de [extração de features](h
 * Análise de sentimentos
 * Modelagem de tópicos
 
-[Quantidade de palavras por música](1_tamanho_musicas.html)
+## Quantidade de palavras nas letras
+Nestes gráficos podemos explorar a distribuição de quantidade de palavras de todas as composições e as palavras-chave de cada comṕosição. Use o mouse para filtrar o histograma.
+[Palavras por músicas](1_tamanho_musicas.html)
 
-[Termos mais frequentes](2_frequencia_termos.html)
-
-## Nuvem de palavras
+## Termos mais frequentes
+Quais os termos que mais se repentem na obra e em quais músicas eles aparecem.
+[Frequência de palavras](2_frequencia_termos.html)
 ![WordCloud](https://github.com/cabrau/visualizando_belchior/blob/master/wordcloud.png?raw=true)
+
+## Grafo de Co-Ocorrência
+Além de conhecer os termos mais utilizados, podemos visualizar como eles aparecem em conjunto através de uma rede. Cada nó do grafo é uma palavra e uma aresta significa que estas ocorrem juntas.
+[Rede de Co-ocorrência](3_network.html)
+
+## Similaridade entre Composições
+Uma técnica bastante utilizada em processamento de linguagem natural é o cáculo do [TF-IDF](https://pt.wikipedia.org/wiki/Tf%E2%80%93idf). O valor TF-IDF (abreviação do inglês *term frequency–inverse document frequency*), é uma medida estatística que tem o intuito de indicar a importância de uma palavra de um documento em relação a uma coleção de documentos ou em um corpus linguístico. Através desse cálculo pode-se vetorizar um documento em um espaço n-dimensional, onde n é o tamanho do vocabulário. Assim cada indice dos vetores represanta um signo linguístico do vocabulário, e o seu valor é o tf-idf daquele termo naquele documento. Vetorizando os documentos, pode-se comparar quais são mais similares. Uma métrica básica é a [distância cosseno](https://en.wikipedia.org/wiki/Cosine_similarity). Neste gráfico, podemos ter uma visão geral da obra, considerando as composições mais similares pelas métricas já citadas.
+[Matriz de Similaridade](4_similaridade_musicas.html)
+
+## Análise de Sentimentos
+Esta análise foi realizada utilizando a biblioteca [TextBlob](https://textblob.readthedocs.io/en/dev/). Através de um algoritimo de regressão supervisionado, treinado previamente, dado um texto como entrada a biblioteca estima um valor real para polaridade, em uma escala de -1 (mais negativo) a 1 (mais positivo) e subjetividade em uma escala que varia de 0 (totalmente objetivo), até 1 (totalmente subjetivo). Entretanto, o modelo foi treinado em inglês. Portanto, foi feita uma tradução de cada letra para este idioma, utilizando a mesma biblioteca, para então ser realizada a análise de sentimento. É necessário considerar as limitações dessa abordagem. Primeiro, em algumas composições Belchior explora o uso de linguagem abstratas, com fonemas que não são reconhecidos pelo vocabulário. Além disso, não é muito claro na documentação do TextBlob o significado das escalas de subjetividade e polaridade. Por último, não sabe-se com exatidão o efeito da tradução na análise de sentimento. Nas palavras de Robert Frost, "poesia é o que se perde na tradução". Apesar de tudo, essa técnica permitiu uma exploração interessante do conjunto da obra do compositor e pode ser um passo inicial para análises mais aprofundadas. 
+[Análise de Sentimentos](5_sentimentos.html)

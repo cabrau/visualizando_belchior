@@ -44,7 +44,7 @@ Quais os termos que mais se repentem na obra e em quais músicas eles aparecem.<
 ![Nuvem de palavras](https://github.com/cabrau/visualizando_belchior/blob/master/wordcloud.png?raw=true)
 
 # Co-Ocorrência de Termos
-### [Rede](3_network.html)
+### [Gráfico de rede](3_network.html)
 Além de conhecer os termos mais utilizados, podemos visualizar como eles aparecem em conjunto através de uma rede. Cada nó do grafo é uma palavra e uma aresta significa que estas ocorrem juntas. O tamanho dos nós é proporcional a quantidade de vezes que o termo ocorre.<br>
 
 # Similaridade entre Composições
@@ -56,5 +56,5 @@ Esta análise foi realizada utilizando a biblioteca [TextBlob](https://textblob.
 * x < -0.1 = Negativo
 * -0.1 <= x <= 0.1 = Neutro
 * x > 0.1 = Positivo<br>
-### [Análise de Sentimentos](5_sentimentos.html)
+### [Análise de sentimentos](5_sentimentos.html)
 ![Pizza](piechart.png)

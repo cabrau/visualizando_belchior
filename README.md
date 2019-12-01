@@ -37,9 +37,10 @@ Após essa coleta, os dados passaram por uma etapa de [extração de features](h
 Nestes gráficos podemos explorar a distribuição de quantidade de palavras de todas as composições e as palavras-chave de cada comṕosição. Use o mouse para filtrar o histograma.<br>
 ## [Palavras por músicas](1_tamanho_musicas.html)
 
-### Termos mais frequentes
+# Termos mais frequentes
 Quais os termos que mais se repentem na obra e em quais músicas eles aparecem.<br>
-## [Frequência de palavras](2_frequencia_termos.html)<br>
+### [Frequência de palavras](2_frequencia_termos.html)<br>
+### Nuvem de palavras
 ![Nuvem de palavras](https://github.com/cabrau/visualizando_belchior/blob/master/wordcloud.png?raw=true)
 
 # Grafo de Co-Ocorrência

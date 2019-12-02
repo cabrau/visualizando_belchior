@@ -62,7 +62,7 @@ Esta biblioteca atribui a cada palavra presente em seu léxico um valor de polar
 # 3)    intensity: modifies next word?      (x0.5 => x2.0)
 ```
 
-A biblioteca análisa sintaticamente a sentença, identificando a classe gramatical de cada palavra e atribuindo valores diferentes para palavras polissêmicas. Entretanto, o léxico que a biblioteca utiliza é em inglês.Portanto, foi necessário traduzir cada letra para este idioma, utilizando a mesma biblioteca, para então ser realizada a análise de sentimento. 
+A biblioteca análisa sintaticamente a sentença, identificando a classe gramatical de cada palavra e atribuindo valores diferentes para palavras polissêmicas. Entretanto, o léxico que a biblioteca utiliza é em inglês. Portanto, foi necessário traduzir cada letra para este idioma, utilizando a mesma biblioteca, para então ser realizada a análise de sentimento. 
 
 É necessário considerar as limitações dessa abordagem. Primeiro, em algumas composições Belchior explora o uso de linguagem abstrata, utilizando palavras que não são reconhecidos pelo vocabulário. Além disso, não é muito claro na documentação do TextBlob o significado das escalas de subjetividade e polaridade ou como estes níveis foram atribuídos a cada palavra no léxico. Uma outra limitação importante é que essa abordagem de pontuar cada palavra sem uma análise contextual falha em reconhecer ironias. Por último, não sabe-se com exatidão o efeito da tradução na análise de sentimento. Nas palavras de Robert Frost, "poesia é o que se perde na tradução". Apesar de tudo, essa técnica permitiu uma exploração interessante do conjunto da obra do compositor e pode ser um passo inicial para análises mais aprofundadas. As categorias discretas de polaridade foram definidas da seguinte maneira:
 

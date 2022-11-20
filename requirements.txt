@@ -8,3 +8,8 @@ nltk
 scipy
 matplotlib
 seaborn
+altair
+vega_datasets
+pyvis
+textblob
+google_trans_new

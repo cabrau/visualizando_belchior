@@ -5,7 +5,7 @@
 
 Antonio Carlos Belchior, mais conhecido somente como Belchior (Sobral, 26 de outubro de 1946 – Santa Cruz do Sul, 30 de abril de 2017), foi um compositor cearense entre os mais notórios do cancioneiro popular brasileiro.  Dono de uma obra de grande densidade e complexidade estética, literária e filosófica, suas ricas composições são objeto de estudo acadêmico e um marco da cultura cearense. 
 
-Este trabalho propõe uma análise de suas composições através de técnicas de processamento de linguagem natural e de visualização de dados. Dado a riqueza poético e musical das composições de Belchior, este trabalho não tem a pretenção de realizar uma análise literária ou linguística aprofundada, mas sim, movido por curiosidade e admiração, utilizar ferramentas computacionacias para explorar os padrões sintáticos e estatísticos que permeiam o conjunto de sua obra. Nos interessa saber:
+Este trabalho propõe uma análise de suas composições através de técnicas de processamento de linguagem natural (NLP) e de visualização de dados. Dado a riqueza poético e musical das composições de Belchior, este trabalho não tem a pretenção de realizar uma análise literária ou linguística aprofundada, mas sim, movido por curiosidade e admiração, utilizar ferramentas computacionacias para explorar os padrões sintáticos e estatísticos que permeiam o conjunto de sua obra. Nos interessa saber:
 
 - Qual a distribuição do tamanho das letras das músicas? E a variabilidade léxica dessas composições?
 - Quais os termos mais relevantes na obra toda? E por música? Quais os termos mais raros?
@@ -20,7 +20,7 @@ O código de geração das visualizações encontra-se neste [notebook](https://
 # Sobre os dados
 As letras foram extraídas do site [Letras](https://www.letras.mus.br/) através de um [web-crawler](https://github.com/cabrau/visualizando_belchior/blob/master/notebooks/web_scrapping.ipynb). Fornecendo como entrada o nome do artista, o web-crawler percorre a lista de todas as músicas do artista, armazenando em uma tabela o título da música, se é uma das mais tocadas e a letra, descartando músicas cuja composição não seja do artista escolhido. Essa metodologia pode ser repetida para outros artistas de interesse. 
 
-Ao total, foram extraídos **93** composições. Após essa coleta, os dados passaram por uma etapa de [extração de atributos](https://github.com/cabrau/visualizando_belchior/blob/master/notebooks/lyrics_analysis.ipynb) utilizando técnicas de processamento de linguagem natural, incluindo:
+Ao total, foram extraídos **93** composições. Após essa coleta, os dados passaram por uma etapa de pré-processamento e extração de atributos utilizando técnicas de [NLP](https://en.wikipedia.org/wiki/Natural_language_processing), incluindo:
 
 * Contagem de palavras por documento
 * Tokenização
@@ -40,7 +40,7 @@ Nestes gráficos podemos explorar a distribuição de quantidade de palavras de 
 
 Essa página também contém um gráfico de dispersão mostrando a relação entre a quantidade de palavras nas músicas e a sua variabilidade léxica. Ou seja, a proporção de palavras únicas no total de palavras utilizadas em cada letra.<br>
 ### [Gráfico de barras, histograma e gráfico de dispersão](visualizations/belchior/palavras_por_musicas.html)
-#
+
 
 # Termos mais frequentes
 Quais os termos que mais se repentem na obra e em quais músicas eles aparecem e quais termos aparecem somente uma única vez na obra completa.<br>
@@ -51,7 +51,7 @@ Quais os termos que mais se repentem na obra e em quais músicas eles aparecem e
 
 Além de conhecer os termos mais utilizados, podemos visualizar como eles co-ocorrem através de uma rede. Cada nó do grafo é uma palavra e uma aresta significa que estas ocorrem juntas.<br>
 ### [Gráfico de rede](visualizations/belchior/rede_co_ocorrencia.html)
-#
+
 
 # Similaridade entre Composições
 Uma técnica bastante utilizada em processamento de linguagem natural é o cáculo do [TF-IDF](https://pt.wikipedia.org/wiki/Tf%E2%80%93idf). O valor TF-IDF (abreviação do inglês *term frequency–inverse document frequency*), é uma medida estatística que tem o intuito de indicar a importância de uma palavra de um documento em relação a uma coleção de documentos ou em um corpus linguístico. 
@@ -61,7 +61,7 @@ Através desse cálculo pode-se vetorizar um documento em um espaço n-dimension
 Neste gráfico, podemos ter uma visão geral da obra, considerando as composições mais similares pelas métricas já citadas.<br>
 
 ### [Matriz de Similaridade](visualizations/belchior/similaridade_musicas.html)
-#
+
 
 # Análise de Sentimentos
 Esta análise foi realizada utilizando a biblioteca [TextBlob](https://textblob.readthedocs.io/en/dev/). 
@@ -78,8 +78,8 @@ A biblioteca análisa sintaticamente a sentença, identificando a classe gramati
 
 É necessário considerar as limitações dessa abordagem. Primeiro, em algumas composições Belchior explora o uso de linguagem abstrata, utilizando palavras que não são reconhecidos pelo vocabulário. Além disso, não é muito claro na documentação do TextBlob o significado das escalas de subjetividade e polaridade ou como estes níveis foram atribuídos a cada palavra no léxico. Uma outra limitação importante é que essa abordagem de pontuar cada palavra sem uma análise contextual falha em reconhecer ironias. Por último, não sabe-se com exatidão o efeito da tradução na análise de sentimento. Nas palavras de Robert Frost, "poesia é o que se perde na tradução". Apesar de tudo, essa técnica permitiu uma exploração interessante do conjunto da obra do compositor e pode ser um passo inicial para análises mais aprofundadas. As categorias discretas de polaridade foram definidas da seguinte maneira:
 
-* $x < -0.1 = Negativo$
-* $-0.1 <= x <= 0.1 = Neutro$
-* $x > 0.1 = Positivo$
+* x < -0.1 = Negativo
+* -0.1 <= x <= 0.1 = Neutro
+* x > 0.1 = Positivo
 
 ### [Análise de sentimentos](visualizations/belchior/analise_sentimentos.html)

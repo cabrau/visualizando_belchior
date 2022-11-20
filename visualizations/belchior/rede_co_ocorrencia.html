@@ -1,0 +1,250 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 1250;
+                 height: 800px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 1250;
+                 height: 800px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "nada", "label": "nada", "shape": "dot", "value": 35}, {"color": "#97c2fc", "id": "novo", "label": "novo", "shape": "dot", "value": 27}, {"color": "#97c2fc", "id": "m\u00e1quina", "label": "m\u00e1quina", "shape": "dot", "value": 25}, {"color": "#97c2fc", "id": "rock", "label": "rock", "shape": "dot", "value": 20}, {"color": "#97c2fc", "id": "medo", "label": "medo", "shape": "dot", "value": 18}, {"color": "#97c2fc", "id": "populus", "label": "populus", "shape": "dot", "value": 17}, {"color": "#97c2fc", "id": "ano", "label": "ano", "shape": "dot", "value": 16}, {"color": "#97c2fc", "id": "passado", "label": "passado", "shape": "dot", "value": 16}, {"color": "#97c2fc", "id": "c\u00e3o", "label": "c\u00e3o", "shape": "dot", "value": 14}, {"color": "#97c2fc", "id": "n\u00e3o", "label": "n\u00e3o", "shape": "dot", "value": 14}, {"color": "#97c2fc", "id": "querem", "label": "querem", "shape": "dot", "value": 14}, {"color": "#97c2fc", "id": "morri", "label": "morri", "shape": "dot", "value": 12}, {"color": "#97c2fc", "id": "morro", "label": "morro", "shape": "dot", "value": 12}, {"color": "#97c2fc", "id": "bye", "label": "bye", "shape": "dot", "value": 12}, {"color": "#97c2fc", "id": "avi\u00e3o", "label": "avi\u00e3o", "shape": "dot", "value": 12}, {"color": "#97c2fc", "id": "viver", "label": "viver", "shape": "dot", "value": 11}, {"color": "#97c2fc", "id": "wanna", "label": "wanna", "shape": "dot", "value": 10}, {"color": "#97c2fc", "id": "hold", "label": "hold", "shape": "dot", "value": 10}, {"color": "#97c2fc", "id": "hand", "label": "hand", "shape": "dot", "value": 10}, {"color": "#97c2fc", "id": "bala", "label": "bala", "shape": "dot", "value": 9}, {"color": "#97c2fc", "id": "belo", "label": "belo", "shape": "dot", "value": 9}, {"color": "#97c2fc", "id": "amor", "label": "amor", "shape": "dot", "value": 9}, {"color": "#97c2fc", "id": "todo", "label": "todo", "shape": "dot", "value": 9}, {"color": "#97c2fc", "id": "mundo", "label": "mundo", "shape": "dot", "value": 9}, {"color": "#97c2fc", "id": "baby", "label": "baby", "shape": "dot", "value": 9}, {"color": "#97c2fc", "id": "voc\u00ea", "label": "voc\u00ea", "shape": "dot", "value": 9}, {"color": "#97c2fc", "id": "cidade", "label": "cidade", "shape": "dot", "value": 8}, {"color": "#97c2fc", "id": "grande", "label": "grande", "shape": "dot", "value": 8}, {"color": "#97c2fc", "id": "sorry", "label": "sorry", "shape": "dot", "value": 8}, {"color": "#97c2fc", "id": "bem", "label": "bem", "shape": "dot", "value": 8}, {"color": "#97c2fc", "id": "vou", "label": "vou", "shape": "dot", "value": 8}, {"color": "#97c2fc", "id": "posso", "label": "posso", "shape": "dot", "value": 8}, {"color": "#97c2fc", "id": "love", "label": "love", "shape": "dot", "value": 8}, {"color": "#97c2fc", "id": "chama", "label": "chama", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "gente", "label": "gente", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "coisa", "label": "coisa", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "parecida", "label": "parecida", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "tudo", "label": "tudo", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "yes", "label": "yes", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "senhores", "label": "senhores", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "vida", "label": "vida", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "sue\u00f1o", "label": "sue\u00f1o", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "tempo", "label": "tempo", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "porcaria", "label": "porcaria", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "primeira", "label": "primeira", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "vez", "label": "vez", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "perder", "label": "perder", "shape": "dot", "value": 7}, {"color": "#97c2fc", "id": "cachorro", "label": "cachorro", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "chorado", "label": "chorado", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "roll", "label": "roll", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "aqui", "label": "aqui", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "nordeste", "label": "nordeste", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "m\u00e3o", "label": "m\u00e3o", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "ainda", "label": "ainda", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "segurei", "label": "segurei", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "diga", "label": "diga", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "amar", "label": "amar", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "mudar", "label": "mudar", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "vem", "label": "vem", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "lugar", "label": "lugar", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "onde", "label": "onde", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "coisas", "label": "coisas", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "demais", "label": "demais", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "sangrado", "label": "sangrado", "shape": "dot", "value": 6}, {"color": "#97c2fc", "id": "bla", "label": "bla", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "leve", "label": "leve", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "assim", "label": "assim", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "t\u00e3o", "label": "t\u00e3o", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "mesmos", "label": "mesmos", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "quero", "label": "quero", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "ora", "label": "ora", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "tra", "label": "tra", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "hermano", "label": "hermano", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "alons", "label": "alons", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "enfants", "label": "enfants", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "vivemos", "label": "vivemos", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "repente", "label": "repente", "shape": "dot", "value": 5}, {"color": "#97c2fc", "id": "nenhuma", "label": "nenhuma", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "teoria", "label": "teoria", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "alto", "label": "alto", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "falante", "label": "falante", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "faca", "label": "faca", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "corte", "label": "corte", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "americano", "label": "americano", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "dinheiro", "label": "dinheiro", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "vela", "label": "vela", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "leva", "label": "leva", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "duro", "label": "duro", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "dever", "label": "dever", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "norte", "label": "norte", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "prazer", "label": "prazer", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "beatle", "label": "beatle", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "favor", "label": "favor", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "canto", "label": "canto", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "quente", "label": "quente", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "pois", "label": "pois", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "enquanto", "label": "enquanto", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "espa\u00e7o", "label": "espa\u00e7o", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "fazer", "label": "fazer", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "renascer", "label": "renascer", "shape": "dot", "value": 4}, {"color": "#97c2fc", "id": "estrela", "label": "estrela", "shape": "dot", "value": 4}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "nada", "to": "nada", "weight": 35}, {"arrows": "to", "from": "novo", "to": "novo", "weight": 27}, {"arrows": "to", "from": "m\u00e1quina", "to": "m\u00e1quina", "weight": 25}, {"arrows": "to", "from": "rock", "to": "rock", "weight": 20}, {"arrows": "to", "from": "medo", "to": "medo", "weight": 18}, {"arrows": "to", "from": "populus", "to": "populus", "weight": 17}, {"arrows": "to", "from": "ano", "to": "passado", "weight": 16}, {"arrows": "to", "from": "populus", "to": "c\u00e3o", "weight": 14}, {"arrows": "to", "from": "n\u00e3o", "to": "querem", "weight": 14}, {"arrows": "to", "from": "morri", "to": "ano", "weight": 12}, {"arrows": "to", "from": "n\u00e3o", "to": "morro", "weight": 12}, {"arrows": "to", "from": "bye", "to": "bye", "weight": 12}, {"arrows": "to", "from": "passado", "to": "morri", "weight": 12}, {"arrows": "to", "from": "ano", "to": "n\u00e3o", "weight": 12}, {"arrows": "to", "from": "medo", "to": "avi\u00e3o", "weight": 12}, {"arrows": "to", "from": "nada", "to": "viver", "weight": 11}, {"arrows": "to", "from": "nada", "to": "n\u00e3o", "weight": 10}, {"arrows": "to", "from": "wanna", "to": "hold", "weight": 10}, {"arrows": "to", "from": "hold", "to": "hand", "weight": 10}, {"arrows": "to", "from": "bala", "to": "bala", "weight": 9}, {"arrows": "to", "from": "belo", "to": "belo", "weight": 9}, {"arrows": "to", "from": "amor", "to": "amor", "weight": 9}, {"arrows": "to", "from": "todo", "to": "mundo", "weight": 9}, {"arrows": "to", "from": "baby", "to": "baby", "weight": 9}, {"arrows": "to", "from": "voc\u00ea", "to": "voc\u00ea", "weight": 9}, {"arrows": "to", "from": "cidade", "to": "grande", "weight": 8}, {"arrows": "to", "from": "sorry", "to": "sorry", "weight": 8}, {"arrows": "to", "from": "bem", "to": "bem", "weight": 8}, {"arrows": "to", "from": "n\u00e3o", "to": "vou", "weight": 8}, {"arrows": "to", "from": "n\u00e3o", "to": "posso", "weight": 8}, {"arrows": "to", "from": "love", "to": "love", "weight": 8}, {"arrows": "to", "from": "chama", "to": "gente", "weight": 7}, {"arrows": "to", "from": "coisa", "to": "parecida", "weight": 7}, {"arrows": "to", "from": "tudo", "to": "tudo", "weight": 7}, {"arrows": "to", "from": "yes", "to": "yes", "weight": 7}, {"arrows": "to", "from": "senhores", "to": "n\u00e3o", "weight": 7}, {"arrows": "to", "from": "vida", "to": "sue\u00f1o", "weight": 7}, {"arrows": "to", "from": "tempo", "to": "porcaria", "weight": 7}, {"arrows": "to", "from": "querem", "to": "nada", "weight": 7}, {"arrows": "to", "from": "porcaria", "to": "chama", "weight": 7}, {"arrows": "to", "from": "primeira", "to": "vez", "weight": 7}, {"arrows": "to", "from": "querem", "to": "perder", "weight": 7}, {"arrows": "to", "from": "perder", "to": "tempo", "weight": 7}, {"arrows": "to", "from": "cachorro", "to": "ano", "weight": 6}, {"arrows": "to", "from": "chorado", "to": "cachorro", "weight": 6}, {"arrows": "to", "from": "rock", "to": "roll", "weight": 6}, {"arrows": "to", "from": "aqui", "to": "nordeste", "weight": 6}, {"arrows": "to", "from": "vez", "to": "m\u00e3o", "weight": 6}, {"arrows": "to", "from": "hand", "to": "medo", "weight": 6}, {"arrows": "to", "from": "ainda", "to": "n\u00e3o", "weight": 6}, {"arrows": "to", "from": "morro", "to": "ano", "weight": 6}, {"arrows": "to", "from": "avi\u00e3o", "to": "segurei", "weight": 6}, {"arrows": "to", "from": "diga", "to": "novo", "weight": 6}, {"arrows": "to", "from": "c\u00e3o", "to": "populus", "weight": 6}, {"arrows": "to", "from": "amar", "to": "mudar", "weight": 6}, {"arrows": "to", "from": "bem", "to": "vem", "weight": 6}, {"arrows": "to", "from": "novo", "to": "diga", "weight": 6}, {"arrows": "to", "from": "lugar", "to": "onde", "weight": 6}, {"arrows": "to", "from": "mudar", "to": "coisas", "weight": 6}, {"arrows": "to", "from": "demais", "to": "chorado", "weight": 6}, {"arrows": "to", "from": "sangrado", "to": "demais", "weight": 6}, {"arrows": "to", "from": "segurei", "to": "primeira", "weight": 6}, {"arrows": "to", "from": "bla", "to": "bla", "weight": 5}, {"arrows": "to", "from": "n\u00e3o", "to": "leve", "weight": 5}, {"arrows": "to", "from": "assim", "to": "t\u00e3o", "weight": 5}, {"arrows": "to", "from": "avi\u00e3o", "to": "wanna", "weight": 5}, {"arrows": "to", "from": "ainda", "to": "mesmos", "weight": 5}, {"arrows": "to", "from": "n\u00e3o", "to": "quero", "weight": 5}, {"arrows": "to", "from": "n\u00e3o", "to": "n\u00e3o", "weight": 5}, {"arrows": "to", "from": "n\u00e3o", "to": "nada", "weight": 5}, {"arrows": "to", "from": "ora", "to": "ora", "weight": 5}, {"arrows": "to", "from": "tra", "to": "tra", "weight": 5}, {"arrows": "to", "from": "vida", "to": "n\u00e3o", "weight": 5}, {"arrows": "to", "from": "sorry", "to": "baby", "weight": 5}, {"arrows": "to", "from": "hermano", "to": "vida", "weight": 5}, {"arrows": "to", "from": "alons", "to": "enfants", "weight": 5}, {"arrows": "to", "from": "mesmos", "to": "vivemos", "weight": 5}, {"arrows": "to", "from": "viver", "to": "repente", "weight": 5}, {"arrows": "to", "from": "viver", "to": "nada", "weight": 5}, {"arrows": "to", "from": "amor", "to": "coisa", "weight": 5}, {"arrows": "to", "from": "amor", "to": "n\u00e3o", "weight": 5}, {"arrows": "to", "from": "tudo", "to": "novo", "weight": 5}, {"arrows": "to", "from": "nenhuma", "to": "teoria", "weight": 4}, {"arrows": "to", "from": "alto", "to": "falante", "weight": 4}, {"arrows": "to", "from": "faca", "to": "corte", "weight": 4}, {"arrows": "to", "from": "americano", "to": "dinheiro", "weight": 4}, {"arrows": "to", "from": "vela", "to": "leva", "weight": 4}, {"arrows": "to", "from": "duro", "to": "dever", "weight": 4}, {"arrows": "to", "from": "norte", "to": "leva", "weight": 4}, {"arrows": "to", "from": "amar", "to": "prazer", "weight": 4}, {"arrows": "to", "from": "beatle", "to": "wanna", "weight": 4}, {"arrows": "to", "from": "assim", "to": "n\u00e3o", "weight": 4}, {"arrows": "to", "from": "favor", "to": "n\u00e3o", "weight": 4}, {"arrows": "to", "from": "quero", "to": "canto", "weight": 4}, {"arrows": "to", "from": "quente", "to": "quente", "weight": 4}, {"arrows": "to", "from": "pois", "to": "n\u00e3o", "weight": 4}, {"arrows": "to", "from": "enquanto", "to": "espa\u00e7o", "weight": 4}, {"arrows": "to", "from": "fazer", "to": "renascer", "weight": 4}, {"arrows": "to", "from": "vem", "to": "ainda", "weight": 4}, {"arrows": "to", "from": "estrela", "to": "vida", "weight": 4}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

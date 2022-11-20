@@ -1,0 +1,15 @@
+numpy
+pandas
+beautifulsoup4
+requests
+ipykernel
+notebook
+nltk
+scipy
+matplotlib
+seaborn
+altair
+vega_datasets
+pyvis
+textblob
+google_trans_new

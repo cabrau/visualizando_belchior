@@ -5,7 +5,7 @@
 
 Antonio Carlos Belchior, mais conhecido somente como Belchior (Sobral, 26 de outubro de 1946 – Santa Cruz do Sul, 30 de abril de 2017), foi um compositor cearense entre os mais notórios do cancioneiro popular brasileiro.  Dono de uma obra de grande densidade e complexidade estética, literária e filosófica, suas ricas composições são objeto de estudo acadêmico e um marco da cultura cearense. 
 
-Este trabalho propõe uma análise de suas composições através de técnicas de processamento de linguagem natural (NLP) e de visualização de dados. Dado a riqueza poético e musical das composições de Belchior, este trabalho não tem a pretenção de realizar uma análise literária ou linguística aprofundada, mas sim, movido por curiosidade e admiração, utilizar ferramentas computacionacias para explorar os padrões sintáticos e estatísticos que permeiam o conjunto de sua obra. Nos interessa saber:
+Este trabalho propõe uma análise de suas composições através de técnicas de processamento de linguagem natural (NLP) e de visualização de dados. Dado a riqueza poético e musical das composições de Belchior, este trabalho não tem a pretensão de realizar uma análise literária ou linguística aprofundada de cada letra. Mas sim, movido por curiosidade e admiração, utilizar ferramentas computacionais para explorar os padrões sintáticos e estatísticos que permeiam o conjunto de sua obra, criando uma nova perspectiva sobre o macro. Nos interessa saber:
 
 - Qual a distribuição do tamanho das letras das músicas? E a variabilidade léxica dessas composições?
 - Quais os termos mais relevantes na obra toda? E por música? Quais os termos mais raros?
